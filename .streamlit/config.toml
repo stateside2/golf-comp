@@ -1,0 +1,35 @@
+[theme]
+# Primary accent color for interactive elements.
+# Change this for navbar selected highlight
+
+# primaryColor = "#00172B"  #--- DARK BLUE
+primaryColor = "#000000"  #--- BLACK
+# primaryColor = "#838383"  #--- GREY
+
+
+# Background color for the main content area.
+# backgroundColor = "#00172B"  #--- DARK BLUE
+
+backgroundColor = "#041b0e"  #--- DARK GREEN
+
+# Background color used for the sidebar and most interactive widgets.
+# This is the navbar background color
+
+# secondaryBackgroundColor = "#0083B8" 
+# secondaryBackgroundColor = "#3BA7E7"  #--- light blue (same as the banner logo)
+secondaryBackgroundColor = "#26603b"  #--- other green, table header blue
+
+
+# Color used for almost all text.
+textColor = "#FFFFFF"
+
+
+# Font family for all text in the app, except code blocks. One of "sans serif", "serif", or "monospace"
+# Default: "sans serif"
+font = "sans serif"
+
+[client]
+showSidebarNavigation = true
+
+
+
