@@ -36,7 +36,7 @@ menu_selection = sac.buttons(
 
 
 # --- PANDAS DATA FRAME CREATION ---
-df_lead_tab = pd.read_excel(excel_file, skiprows=None, sheet_name='xxSheet2xx', usecols=[0,1])
+df_lead_tab = pd.read_excel(excel_file, skiprows=None, sheet_name='xxDO NOT EDITxx', usecols=[0,1])
 df_lead_tab["AVERAGE"] = df_lead_tab["TEAM TOTAL"]/week
 df_lead_tab = df_lead_tab.sort_values(by=["TEAM TOTAL", "TEAM"], ascending=[False, True])
 df_lead_tab.insert(0, "POSITION", range(1, 1 + len(df_lead_tab)))
@@ -55,13 +55,13 @@ df_golf_tab = df_golf_tab.fillna(value="")
 # -----------
 
 if menu_selection == "Team Leaderboard":
-	st.dataframe(df_lead_tab, width=None, height=388, use_container_width=True, hide_index=True, column_order=("POSITION","TEAM","AVERAGE","TEAM TOTAL"), column_config={"POSITION": " ", "Unnamed: 0": " "})
+	st.dataframe(df_lead_tab, width=None, height=388, use_container_width=True, hide_index=True, column_order=("POSITION","TEAM","AVERAGE","TEAM TOTAL"), column_config={"POSITION": " ","AVERAGE": "BEST 8 AVG", "TEAM TOTAL": "BEST 8 TOTAL"})
 
 if menu_selection == "Individual Leaderboard":
-	st.dataframe(df_indv_tab, width=None, height=738, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","AVERAGE","SCORE"), column_config={"POSITION": " "})
+	st.dataframe(df_indv_tab, width=None, height=738, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","AVERAGE","SCORE"), column_config={"POSITION": " ","AVERAGE": "BEST 8 AVG", "SCORE": "BEST 8 TOTAL"})
 
 if menu_selection == "Full Table":
-	st.dataframe(df_golf_tab, width=None, height=738, use_container_width=False, hide_index=True, column_config={"NAME": " ", "1": "WK 1", "2": "WK 2", "3": "WK 3", "4": "WK 4", "5": "WK 5", "6": "WK 6", "7": "WK 7", "8": "WK 8", "9": "WK 9", "10": "WK 10", "11": "WK 11", "12": "WK 12", "13": "WK 13", "14": "WK 14", "15": "WK 15", "16": "WK 16", "17": "WK 17", "18": "WK 18", "19": "WK 19", "20": "WK 20", "21": "WK 21", "22": "WK 22", "23": "WK 23", "24": "WK 24", "Unnamed: 28": "TEAM SCORE"})
+	st.dataframe(df_golf_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"NAME": " ","Unnamed: 28": "TEAM SCORE"})
 
 st.divider()
 
