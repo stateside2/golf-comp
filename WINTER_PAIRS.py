@@ -5,7 +5,8 @@ import streamlit_antd_components as sac
 
 
 excel_file: str = "data/WINTER.xlsx"
-week = 4 #--- USED IN "Week 1/24" LABEL AND AVG. POINTS CALCULATION
+week = 5 #--- USED IN "Week 1/24" LABEL AND AVG. POINTS CALCULATION
+
 
 
 st.set_page_config(page_title="Winter Best Pairs", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
@@ -33,7 +34,7 @@ menu_selection = sac.buttons(
     	# sac.ButtonsItem(label="Weekly Winners", icon="person-circle"),
     	sac.ButtonsItem(label="Handicaps", icon="activity"),
     	sac.ButtonsItem(label="Full Table", icon="table"),
-], label="Week " + str(week) + "/24", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
+], label="Week " + str(week) + "/24 - Winter Pairs", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
 # ---
 
 
