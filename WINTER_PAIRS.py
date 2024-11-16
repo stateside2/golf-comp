@@ -5,7 +5,7 @@ import streamlit_antd_components as sac
 
 
 excel_file: str = "data/WINTER.xlsx"
-week = 5 #--- USED IN "Week 1/24" LABEL AND AVG. POINTS CALCULATION
+week = 5 #--- USED IN "Week 1/24" LABEL
 
 
 
@@ -31,7 +31,7 @@ menu_selection = sac.buttons(
    items=[
     	sac.ButtonsItem(label="Team Leaderboard", icon="trophy-fill"),
     	sac.ButtonsItem(label="Individual Leaderboard", icon="person-arms-up"),
-    	# sac.ButtonsItem(label="Weekly Winners", icon="person-circle"),
+    	sac.ButtonsItem(label="Weekly Winners", icon="person-circle"),
     	sac.ButtonsItem(label="Handicaps", icon="activity"),
     	sac.ButtonsItem(label="Full Table", icon="table"),
 ], label="Week " + str(week) + "/24 - Winter Pairs", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
@@ -41,7 +41,7 @@ menu_selection = sac.buttons(
 
 # --- PANDAS DATA FRAME CREATION ---
 df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,3,4,5,6,7,8,9,31,32,33,34,35,36,37,38], sheet_name='Sheet1', usecols=[0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28])
-df_golf_tab = df_golf_tab.fillna(value="")
+df_golf_tab = df_golf_tab.fillna(0)
 
 
 df_handi_tab = pd.read_excel(excel_file, sheet_name="HANDICAPS", usecols=[0,1])
@@ -50,7 +50,7 @@ df_handi_tab.insert(0, "POSITION", range(1, 1 + len(df_handi_tab)))
 
 
 # --- FUNCTION TO CREATE A LIST OF WEEKS: ['WK 1', 'WK 2', 'WK 3', etc...]
-# --- THIS IS USED IN CALCULATION FOR THE BEST 8 SCORES
+# --- THIS IS USED IN CALCULATION FOR THE BEST 8 SCORES AND WEEKLY WINNER
 def week_list_func(final_week):
 	week_list = []
 	week = 1
@@ -62,16 +62,38 @@ week_list = week_list_func(24)
 
 
 
-# week_win_list = df_golf_tab["WK 1"].tolist()
+# ------------------
+
+def week_winners_func(no_of_weeks):
+	week_win_list = []
+	round_week = 1
+	while round_week <= no_of_weeks:
+		if round_week <= week:  # --- IF THE WEEK HAS BEEN PLAYED (AND THEREFORE HAS AN ACTUAL WINNER)
+			# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
+			# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
+			week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+		else:
+			week_winner = None
+		week_win_list.append(week_winner)
+		round_week = round_week + 1
+	return week_win_list
+week_win_list = week_winners_func(24)
 
 
-# def weekly_win_func():
-# 	week_win_list = []
-# 	for i in range(23):
-# 		week_win_list = df_golf_tab.loc[(WK1), week_list].values.tolist()
+
+week_win_data = {"WEEK": week_list, "WINNER": week_win_list}
+df_weekly_tab = pd.DataFrame(week_win_data)
+
+# df_weekly_tab = pd.DataFrame(columns = ["WEEK", "WINNER"])
+# df_weekly_tab["WEEK"] = week_list
+# df_weekly_tab["WINNER"] = week_win_list
 
 
-# df_weekly_tab = week_list
+
+
+#THEN DO THE SAME FOR THE THURSDAY PAGE
+
+# ----------------
 
 
 def best_8_func(no_of_players):
@@ -146,14 +168,6 @@ df_team_tab = df_team_tab.style.format({"AVG": "{:.2f}", "BEST 16 TOTAL": "{:.0f
 
 
 
-# df_lead_list = df_golf_tab.loc[0, week_list].values.tolist()
-# df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
-# best_8 = pd.Series(df_lead_list).nlargest(8).sum()
-
-# print(df_lead_list)
-# print(best_8)
-
-
 # -----------
 
 if menu_selection == "Team Leaderboard":
@@ -162,8 +176,8 @@ if menu_selection == "Team Leaderboard":
 if menu_selection == "Individual Leaderboard":
 	st.dataframe(df_indv_tab, width=None, height=738, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","RNDS PLAYED","AVG","BEST 8 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
 
-# if menu_selection == "Weekly Winners":
-# 	st.dataframe(df_weekly_tab, width=None, height=738, use_container_width=True, hide_index=True)
+if menu_selection == "Weekly Winners":
+	st.dataframe(df_weekly_tab, width=None, height=912, use_container_width=True, hide_index=True)
 
 if menu_selection == "Handicaps":
 	st.dataframe(df_handi_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"POSITION": " "})
