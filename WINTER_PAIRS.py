@@ -5,7 +5,7 @@ import streamlit_antd_components as sac
 
 
 excel_file: str = "data/WINTER.xlsx"
-week = 5 #--- USED IN "Week 1/24" LABEL
+week = 6 #--- USED IN "Week 1/24" LABEL
 
 
 
@@ -80,7 +80,6 @@ def week_winners_func(no_of_weeks):
 week_win_list = week_winners_func(24)
 
 
-
 week_win_data = {"WEEK": week_list, "WINNER": week_win_list}
 df_weekly_tab = pd.DataFrame(week_win_data)
 
@@ -88,10 +87,6 @@ df_weekly_tab = pd.DataFrame(week_win_data)
 # df_weekly_tab["WEEK"] = week_list
 # df_weekly_tab["WINNER"] = week_win_list
 
-
-
-
-#THEN DO THE SAME FOR THE THURSDAY PAGE
 
 # ----------------
 
