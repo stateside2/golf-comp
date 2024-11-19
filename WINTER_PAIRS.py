@@ -46,6 +46,7 @@ df_golf_tab = df_golf_tab.fillna(0)
 
 df_handi_tab = pd.read_excel(excel_file, sheet_name="HANDICAPS", usecols=[0,1])
 df_handi_tab = df_handi_tab.sort_values(by=["HANDICAP", "NAME"], ascending=[True, True])
+df_handi_tab = df_handi_tab.head(20)
 df_handi_tab.insert(0, "POSITION", range(1, 1 + len(df_handi_tab)))
 
 
