@@ -5,7 +5,7 @@ import streamlit_antd_components as sac
 
 
 excel_file: str = "data/WINTER.xlsx"
-week_thurs = 6 #--- USED IN "Week 1/24" LABEL AND AVG. POINTS CALCULATION
+week_thurs = 7 #--- USED IN "Week 1/24" LABEL AND AVG. POINTS CALCULATION
 
 
 st.set_page_config(page_title="Winter Best Pairs", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
