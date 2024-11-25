@@ -2,10 +2,7 @@
 import pandas as pd
 import streamlit as st
 import streamlit_antd_components as sac
-
-
-excel_file: str = "data/WINTER.xlsx"
-week = 6 #--- USED IN "Week 1/24" LABEL
+from variables import *
 
 
 
@@ -70,9 +67,12 @@ def week_winners_func(no_of_weeks):
 	round_week = 1
 	while round_week <= no_of_weeks:
 		if round_week <= week:  # --- IF THE WEEK HAS BEEN PLAYED (AND THEREFORE HAS AN ACTUAL WINNER)
-			# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
-			# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
-			week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+			if round_week == 7:  # --- NEED THIS IF-STATEMENT SINCE NO ONE PLAYED DURING THIS WEEK
+				week_winner = None
+			else:				
+				# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
+				# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
+				week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
 		else:
 			week_winner = None
 		week_win_list.append(week_winner)
