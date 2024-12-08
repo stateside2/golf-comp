@@ -65,11 +65,14 @@ def week_winners_thurs_func(no_of_weeks):
 	round_week = 1
 	while round_week <= no_of_weeks:
 		if round_week <= week_thurs:  # --- IF THE WEEK HAS BEEN PLAYED (AND THEREFORE HAS AN ACTUAL WINNER)
-			# --- BOTH THESE week_winner_thurs STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
-			# week_winner_thurs = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
-			week_winner_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+			if round_week == 9:
+				week_winner_thurs = "TONY SLATER"
+			else:
+				# --- BOTH THESE week_winner_thurs STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
+				# week_winner_thurs = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
+				week_winner_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
 		else:
-			week_winner_thurs = None
+			week_winner_thurs = None # --- THIS IS USED FOR THE WEEKS NOT YET PLAYED
 		week_win_list_thurs.append(week_winner_thurs)
 		round_week = round_week + 1
 	return week_win_list_thurs
@@ -125,10 +128,10 @@ def rnds_played_func(no_of_players):
 rnds_played_list = rnds_played_func(15)
 
 
-df_inv_thurs_tab = pd.read_excel(excel_file, skiprows=[0,1,2,19,20,21,22,23,24,25,26,27], sheet_name="THURSDAY SINGLES", usecols=[0])
+df_inv_thurs_tab = pd.read_excel(excel_file, skiprows=[0,1,2,19,20,21,22,23,24,25,26,27], sheet_name="THURSDAY SINGLES", usecols=[0,25])
 df_inv_thurs_tab["BEST 8 TOTAL"] = best_8_list
 df_inv_thurs_tab["RNDS PLAYED"] = rnds_played_list
-df_inv_thurs_tab["AVG"] = df_inv_thurs_tab["BEST 8 TOTAL"]/df_inv_thurs_tab["RNDS PLAYED"]
+df_inv_thurs_tab["AVG"] = df_inv_thurs_tab["TOTAL SCORE"]/df_inv_thurs_tab["RNDS PLAYED"]
 df_inv_thurs_tab = df_inv_thurs_tab.sort_values(by=["BEST 8 TOTAL", "NAME"], ascending=[False, True])
 df_inv_thurs_tab.insert(0, "POSITION", range(1, 1 + len(df_inv_thurs_tab)))
 df_inv_thurs_tab["DELTA"] = df_inv_thurs_tab["BEST 8 TOTAL"] - max(df_inv_thurs_tab["BEST 8 TOTAL"])

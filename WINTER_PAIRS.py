@@ -67,7 +67,7 @@ def week_winners_func(no_of_weeks):
 	round_week = 1
 	while round_week <= no_of_weeks:
 		if round_week <= week:  # --- IF THE WEEK HAS BEEN PLAYED (AND THEREFORE HAS AN ACTUAL WINNER)
-			if round_week == 7:  # --- NEED THIS IF-STATEMENT SINCE NO ONE PLAYED DURING THIS WEEK
+			if round_week in (7,9):  # --- NEED THIS IF-STATEMENT SINCE NO ONE PLAYED DURING THIS WEEK
 				week_winner = None
 			else:				
 				# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
@@ -119,10 +119,10 @@ rnds_played_list = rnds_played_func(20)
 
 
 
-df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,3,4,5,6,7,8,9,31,32,33,34,35,36,37,38], sheet_name='Sheet1', usecols=[0])
+df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,3,4,5,6,7,8,9,31,32,33,34,35,36,37,38], sheet_name='Sheet1', usecols=[0,27])
 df_indv_tab["BEST 8 TOTAL"] = best_8_list
 df_indv_tab["RNDS PLAYED"] = rnds_played_list
-df_indv_tab["AVG"] = df_indv_tab["BEST 8 TOTAL"]/df_indv_tab["RNDS PLAYED"]
+df_indv_tab["AVG"] = df_indv_tab["SCORE"]/df_indv_tab["RNDS PLAYED"]
 df_indv_tab = df_indv_tab.sort_values(by=["BEST 8 TOTAL", "NAME"], ascending=[False, True])
 df_indv_tab.insert(0, "POSITION", range(1, 1 + len(df_indv_tab)))
 df_indv_tab["DELTA"] = df_indv_tab["BEST 8 TOTAL"] - max(df_indv_tab["BEST 8 TOTAL"])
