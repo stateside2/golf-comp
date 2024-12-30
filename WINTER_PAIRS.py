@@ -67,12 +67,15 @@ def week_winners_func(no_of_weeks):
 	round_week = 1
 	while round_week <= no_of_weeks:
 		if round_week <= week:  # --- IF THE WEEK HAS BEEN PLAYED (AND THEREFORE HAS AN ACTUAL WINNER)
-			if round_week in (7,9):  # --- NEED THIS IF-STATEMENT SINCE NO ONE PLAYED DURING THIS WEEK
+			if round_week in (7,9):  # --- NEED THIS IF-STATEMENT SINCE THERE WAS NO PLAY DURING THIS WEEK
 				week_winner = None
-			else:				
-				# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
-				# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
-				week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+			else:
+				if round_week == 12:
+					week_winner = "RYAN JACKSON"
+				else:				
+					# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
+					# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
+					week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
 		else:
 			week_winner = None
 		week_win_list.append(week_winner)
@@ -182,6 +185,14 @@ if menu_selection == "Full Table":
 	st.dataframe(df_golf_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"NAME": " ","Unnamed: 28": "TEAM SCORE"})
 
 st.divider()
+# st.html(
+# 	"""
+# 	<div style='text-align:right'>
+# 		<a href='mailto:initrode.uk@gmail.com?subject=Stoneleigh%20Golf%20Site'><small>Built by Initrode</small></a>
+# 	</div>
+# 		"""
+# 	)
+
 
 # --- FUTURE ADDITIONS
 # st.markdown("##")

@@ -1,5 +1,5 @@
 # ---- USED IN MENU TITLE AND WEELY WINNER FUNCTION
-week = 11
+week = 12
 week_thurs = 11
 
 # ---- 
