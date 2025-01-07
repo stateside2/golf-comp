@@ -24,7 +24,7 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
 # --- BANNER IMAGE
-st.image("images/golf_banner_thurs.png", use_column_width="auto")
+st.image("images/golf_banner_thurs.png", use_container_width="auto")
 st.divider()
 
 
@@ -68,9 +68,12 @@ def week_winners_thurs_func(no_of_weeks):
 			if round_week == 9:
 				week_winner_thurs = "TONY SLATER"
 			else:
-				# --- BOTH THESE week_winner_thurs STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
-				# week_winner_thurs = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
-				week_winner_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+				if round_week == 12:
+					week_winner_thurs = "STEW TAYLOR"
+				else:
+					# --- BOTH THESE week_winner_thurs STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
+					# week_winner_thurs = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
+					week_winner_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
 		else:
 			week_winner_thurs = None # --- THIS IS USED FOR THE WEEKS NOT YET PLAYED
 		week_win_list_thurs.append(week_winner_thurs)

@@ -20,7 +20,7 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
 # --- BANNER IMAGE
-st.image("images/golf_banner.png", use_column_width="auto")
+st.image("images/golf_banner.png", use_container_width="auto")
 st.divider()
 
 
