@@ -67,7 +67,7 @@ def week_winners_func(no_of_weeks):
 	round_week = 1
 	while round_week <= no_of_weeks:
 		if round_week <= week:  # --- IF THE WEEK HAS BEEN PLAYED (AND THEREFORE HAS AN ACTUAL WINNER)
-			if round_week in (7,9):  # --- NEED THIS IF-STATEMENT SINCE THERE WAS NO PLAY DURING THIS WEEK
+			if round_week in (7,9,13):  # --- NEED THIS IF-STATEMENT SINCE THERE WAS NO PLAY DURING THIS WEEK
 				week_winner = None
 			else:
 				if round_week == 12:
