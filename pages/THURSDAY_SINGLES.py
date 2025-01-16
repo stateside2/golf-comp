@@ -62,6 +62,7 @@ week_list = week_list_func(24)
 
 def week_winners_thurs_func(no_of_weeks):
 	week_win_list_thurs = []
+	week_score_list_thurs = []
 	round_week = 1
 	while round_week <= no_of_weeks:
 		if round_week <= week_thurs:  # --- IF THE WEEK HAS BEEN PLAYED (AND THEREFORE HAS AN ACTUAL WINNER)
@@ -74,24 +75,24 @@ def week_winners_thurs_func(no_of_weeks):
 					# --- BOTH THESE week_winner_thurs STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
 					# week_winner_thurs = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
 					week_winner_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+					week_winner_score_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "WK "+str(round_week)].item()
 		else:
 			week_winner_thurs = None # --- THIS IS USED FOR THE WEEKS NOT YET PLAYED
+			week_winner_score_thurs = None
 		week_win_list_thurs.append(week_winner_thurs)
+		week_score_list_thurs.append(week_winner_score_thurs)
 		round_week = round_week + 1
-	return week_win_list_thurs
-week_win_list_thurs = week_winners_thurs_func(24)
+	return week_win_list_thurs, week_score_list_thurs
+week_win_list_thurs, week_score_list_thurs = week_winners_thurs_func(24)
 
 
 
-week_win_thurs_data = {"WEEK": week_list, "WINNER": week_win_list_thurs}
+week_win_thurs_data = {"WEEK": week_list, "WINNER": week_win_list_thurs, "SCORE": week_score_list_thurs}
 df_weekly_thurs_tab = pd.DataFrame(week_win_thurs_data)
 
 # df_weekly_tab = pd.DataFrame(columns = ["WEEK", "WINNER"])
 # df_weekly_tab["WEEK"] = week_list
 # df_weekly_tab["WINNER"] = week_win_list_thurs
-
-
-
 
 
 
