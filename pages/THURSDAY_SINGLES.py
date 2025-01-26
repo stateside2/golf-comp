@@ -66,16 +66,20 @@ def week_winners_thurs_func(no_of_weeks):
 	round_week = 1
 	while round_week <= no_of_weeks:
 		if round_week <= week_thurs:  # --- IF THE WEEK HAS BEEN PLAYED (AND THEREFORE HAS AN ACTUAL WINNER)
-			if round_week == 9:
-				week_winner_thurs = "TONY SLATER"
+			if round_week == 15:
+				week_winner_thurs = None
+				week_winner_score_thurs = None
 			else:
-				if round_week == 12:
-					week_winner_thurs = "STEW TAYLOR"
+				if round_week == 9:
+					week_winner_thurs = "TONY SLATER"
 				else:
-					# --- BOTH THESE week_winner_thurs STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
-					# week_winner_thurs = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
-					week_winner_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
-					week_winner_score_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "WK "+str(round_week)].item()
+					if round_week == 12:
+						week_winner_thurs = "STEW TAYLOR"
+					else:
+						# --- BOTH THESE week_winner_thurs STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
+						# week_winner_thurs = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
+						week_winner_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+						week_winner_score_thurs = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "WK "+str(round_week)].item()
 		else:
 			week_winner_thurs = None # --- THIS IS USED FOR THE WEEKS NOT YET PLAYED
 			week_winner_score_thurs = None
