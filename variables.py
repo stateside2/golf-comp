@@ -1,6 +1,6 @@
 # ---- USED IN MENU TITLE AND WEELY WINNER FUNCTION
-week = 16
-week_thurs = 15
+week = 17
+week_thurs = 16
 
 # ---- 
 excel_file: str = "data/WINTER.xlsx"

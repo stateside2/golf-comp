@@ -24,7 +24,7 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
 # --- BANNER IMAGE
-st.image("images/golf_banner_thurs.png", use_column_width="auto")
+st.image("images/golf_banner_thurs.png", use_container_width="auto")
 st.divider()
 
 
@@ -158,7 +158,7 @@ if menu_selection == "Handicaps":
 	st.dataframe(df_handi_thurs_tab, width=None, height=592, use_container_width=True, hide_index=True, column_config={"POSITION": " ", "HANDICAP THURS": "HANDICAP"})
 
 if menu_selection == "Full Table":
-	st.dataframe(df_golf_tab, width=None, height=592, use_container_width=True, hide_index=True, column_config={"NAME": " ","Unnamed: 25": "TOTAL"})
+	st.dataframe(df_golf_tab, width=None, height=592, use_container_width=True, hide_index=True, column_config={"NAME": st.column_config.Column(pinned=True),"Unnamed: 25": "TOTAL"})
 
 st.divider()
 

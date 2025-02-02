@@ -20,7 +20,7 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
 # --- BANNER IMAGE
-st.image("images/golf_banner.png", use_column_width="auto")
+st.image("images/golf_banner.png", use_container_width="auto")
 st.divider()
 
 
@@ -187,13 +187,13 @@ if menu_selection == "Handicaps":
 	st.dataframe(df_handi_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"POSITION": " "})
 
 if menu_selection == "Full Table":
-	st.dataframe(df_golf_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"NAME": " ","Unnamed: 28": "TEAM SCORE"})
+	st.dataframe(df_golf_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"NAME": st.column_config.Column(pinned=True), "Unnamed: 28": "TEAM SCORE"})
 
 st.divider()
 # st.html(
 # 	"""
 # 	<div style='text-align:right'>
-# 		<a href='mailto:initrode.uk@gmail.com?subject=Stoneleigh%20Golf%20Site'><small>Built by Initrode</small></a>
+# 		<a href='mailto:initrode.uk@gmail.com?subject=Stoneleigh%20Golf%20Site'><small>Built by INITRODE.UK</small></a>
 # 	</div>
 # 		"""
 # 	)
