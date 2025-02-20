@@ -190,13 +190,23 @@ if menu_selection == "Full Table":
 	st.dataframe(df_golf_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"NAME": st.column_config.Column(pinned=True), "Unnamed: 28": "TEAM SCORE"})
 
 st.divider()
-# st.html(
-# 	"""
-# 	<div style='text-align:right'>
-# 		<a href='mailto:initrode.uk@gmail.com?subject=Stoneleigh%20Golf%20Site'><small>Built by INITRODE.UK</small></a>
-# 	</div>
-# 		"""
-# 	)
+
+call_sign = st.html(
+	"""
+	<style>
+		a {
+			text-decoration: none;
+			color: grey;
+			}
+	</style>
+
+	<div style="text-align:right">
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.4</a></small>
+	</div>
+		"""
+	)
+
+st.echo(call_sign)
 
 
 # --- FUTURE ADDITIONS

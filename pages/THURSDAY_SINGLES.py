@@ -162,6 +162,24 @@ if menu_selection == "Full Table":
 
 st.divider()
 
+call_sign = st.html(
+	"""
+	<style>
+		a {
+			text-decoration: none;
+			color: grey;
+			}
+	</style>
+
+	<div style="text-align:right">
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.4</a></small>
+	</div>
+		"""
+	)
+
+st.echo(call_sign)
+
+
 # --- FUTURE ADDITIONS
 # st.markdown("##")
 # st.snow() # --- WINTER / XMAS UPDATE --- DOES IT WORK ON CELLPHONE?
