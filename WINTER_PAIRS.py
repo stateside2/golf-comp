@@ -2,6 +2,7 @@
 import pandas as pd
 import streamlit as st
 import streamlit_antd_components as sac
+import time
 from variables import *
 
 
@@ -74,11 +75,16 @@ def week_winners_func(no_of_weeks):
 			else:
 				if round_week == 12:
 					week_winner = "RYAN JACKSON"
+					week_winner_score = 38
 				else:
-					# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
-					# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
-					week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
-					week_winner_score = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "WK "+str(round_week)].item()
+					if round_week == 20:
+						week_winner = "FRED HOLLIWORTH"
+						week_winner_score = 36
+					else:
+						# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
+						# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
+						week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+						week_winner_score = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "WK "+str(round_week)].item()
 		else:
 			week_winner = None
 			week_winner_score = None
@@ -176,6 +182,9 @@ df_team_tab = df_team_tab.style.format({"AVG": "{:.2f}", "BEST 16 TOTAL": "{:.0f
 
 if menu_selection == "Team Leaderboard":
 	st.dataframe(df_team_tab, width=None, height=388, use_container_width=True, hide_index=True, column_order=("POSITION","TEAM","RNDS PLAYED","AVG","BEST 16 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
+	st.toast("⛳️ Only a few rounds remain!! 🏆")
+	time.sleep(3)
+
 
 if menu_selection == "Individual Leaderboard":
 	st.dataframe(df_indv_tab, width=None, height=738, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","RNDS PLAYED","AVG","BEST 8 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
@@ -201,12 +210,14 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.4</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.6</a></small>
 	</div>
 		"""
 	)
 
 st.echo(call_sign)
+
+
 
 
 # --- FUTURE ADDITIONS
@@ -215,7 +226,7 @@ st.echo(call_sign)
 # st.balloons() # --- END OF SEASON CELEBRATION --- DOES IT WORK ON CELLPHONE?
 # st.toast("xxxxxxx is the winner", icon="🔥") # --- WINNER ANNOUNCEMENT --- DOES IT WORK ON CELLPHONE?
 # time.sleep(1) --- ALSO HAVE TO import time
-# POSSIBLE ICONS = [🔥, 🚨, 💩, 💥, 🔆, 😎, 😖, 😟, 🥇, 🏅, ☠️, ⚠️, ⚽, ⭐, 💯, ✅, ❗, 🏆]
+# POSSIBLE ICONS = [🔥, 🚨, 💩, 💥, 🔆, 😎, 😖, 😟, 🥇, 🏅, ☠️, ⚠️, ⚽, ⭐, 💯, ✅, ❗, 🏆, ⛳️, 🏌️]
 
 # st.title("Title Marlow Dukes") --- st.header("This is a header") --- st.subheader("Sub Header") --- st.markdown("data correct as of ...")
 

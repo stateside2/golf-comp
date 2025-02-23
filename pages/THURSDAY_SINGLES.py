@@ -72,9 +72,11 @@ def week_winners_thurs_func(no_of_weeks):
 			else:
 				if round_week == 9:
 					week_winner_thurs = "TONY SLATER"
+					week_winner_score_thurs = 36
 				else:
 					if round_week == 12:
 						week_winner_thurs = "STEW TAYLOR"
+						week_winner_score_thurs = 38
 					else:
 						# --- BOTH THESE week_winner_thurs STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
 						# week_winner_thurs = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
@@ -172,7 +174,7 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.4</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.6</a></small>
 	</div>
 		"""
 	)
