@@ -81,10 +81,14 @@ def week_winners_func(no_of_weeks):
 						week_winner = "FRED HOLLIWORTH"
 						week_winner_score = 36
 					else:
-						# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
-						# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
-						week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
-						week_winner_score = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "WK "+str(round_week)].item()
+						if round_week == 21:
+							week_winner = "PAUL HANCOX"
+							week_winner_score = 35
+						else:
+							# --- BOTH THESE week_winner STATEMENTS DO THE SAME THING. item() IS NEEDED TO EXTRACT JUST THE NAME FROM THE OUTPUT
+							# week_winner = df_golf_tab["NAME"][df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max()].item()
+							week_winner = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "NAME"].item()
+							week_winner_score = df_golf_tab.loc[df_golf_tab["WK "+str(round_week)]==df_golf_tab["WK "+str(round_week)].max(), "WK "+str(round_week)].item()
 		else:
 			week_winner = None
 			week_winner_score = None
@@ -182,8 +186,8 @@ df_team_tab = df_team_tab.style.format({"AVG": "{:.2f}", "BEST 16 TOTAL": "{:.0f
 
 if menu_selection == "Team Leaderboard":
 	st.dataframe(df_team_tab, width=None, height=388, use_container_width=True, hide_index=True, column_order=("POSITION","TEAM","RNDS PLAYED","AVG","BEST 16 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
-	st.toast("⛳️ Only a few rounds remain!! 🏆")
-	time.sleep(3)
+	st.toast("⛳️ Cancel those weekend plans. It's the final push! 🏆")
+	time.sleep(5)
 
 
 if menu_selection == "Individual Leaderboard":
@@ -210,7 +214,7 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.6</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.7</a></small>
 	</div>
 		"""
 	)
