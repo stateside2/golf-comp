@@ -174,7 +174,7 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.10</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 2.0.11</a></small>
 	</div>
 		"""
 	)

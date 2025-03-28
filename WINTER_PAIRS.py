@@ -186,8 +186,8 @@ df_team_tab = df_team_tab.style.format({"AVG": "{:.2f}", "BEST 16 TOTAL": "{:.0f
 
 if menu_selection == "Team Leaderboard":
 	st.dataframe(df_team_tab, width=None, height=388, use_container_width=True, hide_index=True, column_order=("POSITION","TEAM","RNDS PLAYED","AVG","BEST 16 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
-	# st.toast("⛳️ Cancel those weekend plans. It's the final push! 🏆")
-	# time.sleep(5)
+	st.toast("Congrats to all the winners! 🏌️ 🏆")
+	time.sleep(5)
 
 if menu_selection == "Individual Leaderboard":
 	st.dataframe(df_indv_tab, width=None, height=738, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","RNDS PLAYED","AVG","BEST 8 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
@@ -213,7 +213,7 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - v2.0.10</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 2.0.11</a></small>
 	</div>
 		"""
 	)
