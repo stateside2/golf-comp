@@ -3,11 +3,12 @@ import pandas as pd
 import streamlit as st
 import streamlit_antd_components as sac
 import time
-from variables import *
+# from variables import *
 
+excel_file: str = "data/WINTER2425.xlsx"
+week = 24
 
-
-st.set_page_config(page_title="Winter Best Pairs", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
+# st.set_page_config(page_title="Winter Best Pairs", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 # --- HIDE 1) STREAMLIT HEADER/FOOTER MENUS, 2) POP-UP DOWNLOAD, SEARCH, EXPAND DATAFRAME ELEMENTS, 3) EXPAND IMAGE  ---
 hide_st_style = """ 
@@ -32,7 +33,7 @@ menu_selection = sac.buttons(
     	sac.ButtonsItem(label="Weekly Winners", icon="person-circle"),
     	sac.ButtonsItem(label="Handicaps", icon="activity"),
     	sac.ButtonsItem(label="Full Table", icon="table"),
-], label="Week " + str(week) + "/24 - Winter Pairs", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
+], label="FINAL - WINTER 24/25 PAIRS", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
 # ---
 
 
@@ -186,8 +187,8 @@ df_team_tab = df_team_tab.style.format({"AVG": "{:.2f}", "BEST 16 TOTAL": "{:.0f
 
 if menu_selection == "Team Leaderboard":
 	st.dataframe(df_team_tab, width=None, height=388, use_container_width=True, hide_index=True, column_order=("POSITION","TEAM","RNDS PLAYED","AVG","BEST 16 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
-	st.toast("Congrats to all the winners! 🏌️ 🏆")
-	time.sleep(5)
+	# st.toast("Congrats to all the winners! 🏌️ 🏆")
+	# time.sleep(5)
 
 if menu_selection == "Individual Leaderboard":
 	st.dataframe(df_indv_tab, width=None, height=738, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","RNDS PLAYED","AVG","BEST 8 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
