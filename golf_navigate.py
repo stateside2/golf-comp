@@ -5,7 +5,7 @@ st.set_page_config(page_title="Stoneleigh Golf Tournaments", page_icon="images/g
 
 
 sunday_singles = st.Page("SUNDAY_SUMMER_SINGLES.py", title="SUNDAY SINGLES", icon=":material/sports_golf:")
-# thursday_singles = st.Page("THURSDAY_SUMMER_SINGLES.py", title="THURSDAY SINGLES", icon=":material/sports_golf:")
+thursday_singles = st.Page("THURSDAY_SUMMER_SINGLES.py", title="THURSDAY SINGLES", icon=":material/sports_golf:")
 
 winter2425_pairs = st.Page("WINTER_PAIRS.py", title="WINTER 24/25 - PAIRS", icon=":material/trophy:")
 winter2425_singles = st.Page("THURSDAY_SINGLES.py", title="WINTER 24/25 - SINGLES", icon=":material/trophy:")
@@ -14,7 +14,7 @@ winter2425_singles = st.Page("THURSDAY_SINGLES.py", title="WINTER 24/25 - SINGLE
 with st.sidebar:
 	st.subheader("Current Tournament")
 	st.page_link(sunday_singles, label=sunday_singles.title, icon=sunday_singles.icon)
-	# st.page_link(thursday_singles, label=thursday_singles.title, icon=thursday_singles.icon)
+	st.page_link(thursday_singles, label=thursday_singles.title, icon=thursday_singles.icon)
 
 	st.write("---")
 
@@ -28,7 +28,7 @@ with st.sidebar:
 
 	st.write("---")
 
-pg = st.navigation([sunday_singles, winter2425_pairs, winter2425_singles], position="hidden")
+pg = st.navigation([sunday_singles, thursday_singles, winter2425_pairs, winter2425_singles], position="hidden")
 pg.run()
 
 

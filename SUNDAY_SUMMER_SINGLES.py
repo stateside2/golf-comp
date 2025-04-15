@@ -130,7 +130,6 @@ def rnds_played_func(no_of_players):
 		player_no = player_no + 1
 	return rnds_played_list
 rnds_played_list = rnds_played_func(18)
-print(rnds_played_list)
 
 
 df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=[0,1,26])
@@ -158,7 +157,7 @@ if menu_selection == "Nearest Pin":
 	st.dataframe(df_near_pin, width=None,height=912, use_container_width=True, hide_index=True, column_config={"SUNDAY NEAREST PIN": "NEAREST PIN"})
 
 if menu_selection == "Handicaps":
-	st.dataframe(df_handi_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"POSITION": " "})
+	st.dataframe(df_handi_tab, width=None, height=912, use_container_width=True, hide_index=True, column_config={"POSITION": " "})
 
 if menu_selection == "Full Table":
 	st.dataframe(df_golf_tab, width=None, height=738, use_container_width=True, hide_index=True, column_config={"NAME": st.column_config.Column(pinned=True)})
@@ -175,7 +174,7 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.0</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.0.1</a></small>
 	</div>
 		"""
 	)
