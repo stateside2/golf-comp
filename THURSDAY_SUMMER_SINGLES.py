@@ -42,7 +42,7 @@ df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,18,19,20], sheet_name='T
 df_golf_tab = df_golf_tab.fillna(0)
 
 
-df_near_pin = pd.read_excel(excel_file, sheet_name='NEAREST PIN', usecols=[0,1])
+df_near_pin = pd.read_excel(excel_file, sheet_name='NEAREST PIN', usecols=[0,2])
 
 
 df_handi_tab = pd.read_excel(excel_file, sheet_name="HANDICAPS", usecols=[0,2])
