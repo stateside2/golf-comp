@@ -32,7 +32,7 @@ menu_selection = sac.buttons(
     	sac.ButtonsItem(label="Nearest Pin", icon="pin-map"),
     	sac.ButtonsItem(label="Handicaps", icon="activity"),
     	sac.ButtonsItem(label="Full Table", icon="table"),
-], label="Week " + str(week_thurs) + "/24 - Thursday Singles", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
+], label="Week " + str(week_thurs) + " of 24 - Thursday Singles", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
 # ---
 
 
@@ -173,7 +173,7 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.0.1</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.1.2</a></small>
 	</div>
 		"""
 	)
