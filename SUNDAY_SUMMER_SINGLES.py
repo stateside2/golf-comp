@@ -105,17 +105,17 @@ df_weekly_tab = pd.read_excel(excel_file, sheet_name='xxxDO NOT EDITxxx', usecol
 # ----------------
 
 # --- NEEDED AFTER WEEK 8 ---
-# def best_8_func(no_of_players):
-# 	best_8_list = []
-# 	player_no = 1
-# 	while player_no <= no_of_players:
-# 		df_lead_list = df_golf_tab.loc[(player_no - 1), week_list].values.tolist()
-# 		df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
-# 		best_8 = pd.Series(df_lead_list).nlargest(8).sum()
-# 		best_8_list.append(best_8)
-# 		player_no = player_no + 1
-# 	return best_8_list
-# best_8_list = best_8_func(18)
+def best_8_func(no_of_players):
+	best_8_list = []
+	player_no = 1
+	while player_no <= no_of_players:
+		df_lead_list = df_golf_tab.loc[(player_no - 1), week_list].values.tolist()
+		df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
+		best_8 = pd.Series(df_lead_list).nlargest(8).sum()
+		best_8_list.append(best_8)
+		player_no = player_no + 1
+	return best_8_list
+best_8_list = best_8_func(18)
 
 
 
@@ -133,8 +133,8 @@ rnds_played_list = rnds_played_func(18)
 
 
 df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=[0,1,26])
-# df_indv_tab["BEST 8 TOTAL"] = best_8_list
-df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
+df_indv_tab["BEST 8 TOTAL"] = best_8_list
+# df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
 df_indv_tab["RNDS PLAYED"] = rnds_played_list
 df_indv_tab["AVG"] = df_indv_tab["BEST 8 TOTAL"]/df_indv_tab["RNDS PLAYED"]
 df_indv_tab = df_indv_tab.sort_values(by=["BEST 8 TOTAL", "NAME"], ascending=[False, True])
@@ -174,7 +174,7 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.1.2</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.1.3</a></small>
 	</div>
 		"""
 	)
