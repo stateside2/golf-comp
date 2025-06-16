@@ -135,7 +135,7 @@ df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,18,19,20], sheet_name='T
 df_indv_tab["BEST 8 TOTAL"] = best_8_list
 # df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
 df_indv_tab["RNDS PLAYED"] = rnds_played_list
-df_indv_tab["AVG"] = df_indv_tab["BEST 8 TOTAL"]/df_indv_tab["RNDS PLAYED"]
+df_indv_tab["AVG"] = df_indv_tab["TOTAL"]/df_indv_tab["RNDS PLAYED"]
 df_indv_tab = df_indv_tab.sort_values(by=["BEST 8 TOTAL", "NAME"], ascending=[False, True])
 df_indv_tab.insert(0, "POSITION", range(1, 1 + len(df_indv_tab)))
 df_indv_tab["DELTA"] = df_indv_tab["BEST 8 TOTAL"] - max(df_indv_tab["BEST 8 TOTAL"])
