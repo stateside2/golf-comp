@@ -184,7 +184,8 @@ call_sign = st.html(
 
 st.echo(call_sign)
 
-
+st.toast("🏅 CONGRATS TO ALL THE WINNERS 🏅")
+st.balloons()
 
 
 # --- FUTURE ADDITIONS
