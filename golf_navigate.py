@@ -4,9 +4,12 @@ import streamlit as st
 st.set_page_config(page_title="Stoneleigh Golf Tournaments", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 
-sunday_singles = st.Page("SUNDAY_SUMMER_SINGLES.py", title="SUNDAY SINGLES", icon=":material/sports_golf:")
-thursday_singles = st.Page("THURSDAY_SUMMER_SINGLES.py", title="THURSDAY SINGLES", icon=":material/sports_golf:")
+sunday_singles = st.Page("WINTER2526_SUNDAY.py", title="SUNDAY SINGLES", icon=":material/sports_golf:")
+thursday_singles = st.Page("WINTER2526_THURSDAY.py", title="THURSDAY SINGLES", icon=":material/sports_golf:")
 
+
+summer25_sunday = st.Page("SUMMER25_SUNDAY.py", title="SUMMER 25 - SUNDAY", icon=":material/trophy:")
+summer25_thursday = st.Page("SUMMER25_THURSDAY.py", title="SUMMER 25 - THURSDAY", icon=":material/trophy:")
 winter2425_pairs = st.Page("WINTER_PAIRS.py", title="WINTER 24/25 - PAIRS", icon=":material/trophy:")
 winter2425_singles = st.Page("THURSDAY_SINGLES.py", title="WINTER 24/25 - SINGLES", icon=":material/trophy:")
 
@@ -23,6 +26,8 @@ with st.sidebar:
 	st.write("---")
 
 	st.subheader("Past Tournaments")
+	st.page_link(summer25_sunday, label=summer25_sunday.title, icon=summer25_sunday.icon)
+	st.page_link(summer25_thursday, label=summer25_thursday.title, icon=summer25_thursday.icon)
 	st.page_link(winter2425_pairs, label=winter2425_pairs.title, icon=winter2425_pairs.icon)
 	st.page_link(winter2425_singles, label=winter2425_singles.title, icon=winter2425_singles.icon)
 
@@ -32,7 +37,8 @@ with st.sidebar:
 
 	st.write("---")
 
-pg = st.navigation([sunday_singles, thursday_singles, all_time_stats, winter2425_pairs, winter2425_singles], position="hidden")
+pg = st.navigation([sunday_singles, thursday_singles, all_time_stats, summer25_sunday, summer25_thursday, winter2425_pairs, winter2425_singles], position="hidden")
+# pg = st.navigation([sunday_singles, thursday_singles, summer25_sunday, summer25_thursday, winter2425_pairs, winter2425_singles], position="hidden")
 pg.run()
 
 
