@@ -38,8 +38,10 @@ menu_selection = sac.buttons(
 
 
 # --- PANDAS DATA FRAME CREATION ---
-df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,18,19,20], sheet_name='THURSDAY SINGLES', usecols=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26])
-df_golf_tab = df_golf_tab.fillna(0)
+df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,18,19,20], sheet_name='THURSDAY SINGLES', usecols=range(1,27))
+
+df_golf_tab_num_cols = df_golf_tab.columns[df_golf_tab.columns != "NAME"]
+df_golf_tab[df_golf_tab_num_cols] = df_golf_tab[df_golf_tab_num_cols].apply(pd.to_numeric, errors='coerce')  # -- FIXES THE DATATYPE ISSUE WHEN A PLAYERS ROW DOESN'T HAVE A SCORE. ISSUE FOUND HERE ... best_8 = pd.Series(df_lead_list).nlargest(8).sum()
 
 
 df_near_pin = pd.read_excel(excel_file, sheet_name='NEAREST PIN', usecols=[0,2])
@@ -103,7 +105,7 @@ df_weekly_tab = pd.read_excel(excel_file, sheet_name='xxxDO NOT EDITxxx', usecol
 
 # ----------------
 
-# --- NEEDED AFTER WEEK 8 ---
+# --- NEEDED AFTER WEEK 8 --- ADJUST THE NUMBER OF PLAYERS IF NEEDED
 def best_8_func(no_of_players):
 	best_8_list = []
 	player_no = 1
@@ -160,6 +162,7 @@ if menu_selection == "Handicaps":
 	st.dataframe(df_handi_tab, width=None, height=912, use_container_width=True, hide_index=True, column_config={"POSITION": " "})
 
 if menu_selection == "Full Table":
+	df_golf_tab = df_golf_tab.fillna(0)
 	st.dataframe(df_golf_tab, width=None, height=550, use_container_width=True, hide_index=True, column_config={"NAME": st.column_config.Column(pinned=True)})
 
 st.divider()
