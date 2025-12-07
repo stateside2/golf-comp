@@ -1,7 +1,7 @@
 import streamlit as st
 
 # ---- USED IN MENU TITLE AND WEELY WINNER FUNCTION
-week = 8
+week = 9
 week_thurs = 9
 
 # ---- 
