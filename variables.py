@@ -1,8 +1,8 @@
 import streamlit as st
 
 # ---- USED IN MENU TITLE AND WEELY WINNER FUNCTION
-week = 9
-week_thurs = 9
+week = 10
+week_thurs = 11
 
 # ---- 
 excel_file: str = "data/WINTER_GOLF_2526.xlsx"

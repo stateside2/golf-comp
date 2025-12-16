@@ -39,8 +39,12 @@ menu_selection = sac.buttons(
 
 
 # --- PANDAS DATA FRAME CREATION ---
-df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26])
+df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=range(1,27))
 df_golf_tab = df_golf_tab.fillna(0)
+
+df_golf_tab_num_cols = df_golf_tab.columns[df_golf_tab.columns != "NAME"]
+df_golf_tab[df_golf_tab_num_cols] = df_golf_tab[df_golf_tab_num_cols].apply(pd.to_numeric, errors='coerce')  # -- FIXES THE DATATYPE ISSUE WHEN A PLAYERS ROW DOESN'T HAVE A SCORE. ISSUE FOUND HERE ... best_8 = pd.Series(df_lead_list).nlargest(8).sum()
+
 
 
 df_near_pin = pd.read_excel(excel_file, sheet_name='NEAREST PIN', usecols=[0,1])
@@ -104,18 +108,18 @@ df_weekly_tab = pd.read_excel(excel_file, sheet_name='xxxDO NOT EDITxxx', usecol
 
 # ----------------
 
-# --- NEEDED AFTER WEEK 8 ---
-# def best_8_func(no_of_players):
-# 	best_8_list = []
-# 	player_no = 1
-# 	while player_no <= no_of_players:
-# 		df_lead_list = df_golf_tab.loc[(player_no - 1), week_list].values.tolist()
-# 		df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
-# 		best_8 = pd.Series(df_lead_list).nlargest(8).sum()
-# 		best_8_list.append(best_8)
-# 		player_no = player_no + 1
-# 	return best_8_list
-# best_8_list = best_8_func(18)
+# --- NEEDED AFTER WEEK 8 ------ ADJUST THE NUMBER OF PLAYERS IF NEEDED
+def best_8_func(no_of_players):
+	best_8_list = []
+	player_no = 1
+	while player_no <= no_of_players:
+		df_lead_list = df_golf_tab.loc[(player_no - 1), week_list].values.tolist()
+		df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
+		best_8 = pd.Series(df_lead_list).nlargest(8).sum()
+		best_8_list.append(best_8)
+		player_no = player_no + 1
+	return best_8_list
+best_8_list = best_8_func(18)
 
 
 
@@ -136,8 +140,8 @@ rnds_played_list = rnds_played_func(18)
 
 df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=[0,1,26])
 # NEEDED AFTER WEEK 8
-# df_indv_tab["BEST 8 TOTAL"] = best_8_list
-df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
+df_indv_tab["BEST 8 TOTAL"] = best_8_list
+# df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
 df_indv_tab["RNDS PLAYED"] = rnds_played_list
 # df_indv_tab["AVG"] = df_indv_tab["BEST 8 TOTAL"]/df_indv_tab["RNDS PLAYED"]
 df_indv_tab["AVG"] = df_indv_tab["TOTAL"]/df_indv_tab["RNDS PLAYED"]
