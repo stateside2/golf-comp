@@ -38,7 +38,8 @@ menu_selection = sac.buttons(
 
 
 # --- PANDAS DATA FRAME CREATION ---
-df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,18,19,20], sheet_name='THURSDAY SINGLES', usecols=range(1,27))
+df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,17,18,19], sheet_name='THURSDAY SINGLES', usecols=range(1,27))
+df_golf_tab = df_golf_tab.fillna(0)
 
 df_golf_tab_num_cols = df_golf_tab.columns[df_golf_tab.columns != "NAME"]
 df_golf_tab[df_golf_tab_num_cols] = df_golf_tab[df_golf_tab_num_cols].apply(pd.to_numeric, errors='coerce')  # -- FIXES THE DATATYPE ISSUE WHEN A PLAYERS ROW DOESN'T HAVE A SCORE. ISSUE FOUND HERE ... best_8 = pd.Series(df_lead_list).nlargest(8).sum()
@@ -116,7 +117,7 @@ def best_8_func(no_of_players):
 		best_8_list.append(best_8)
 		player_no = player_no + 1
 	return best_8_list
-best_8_list = best_8_func(14)
+best_8_list = best_8_func(13)
 
 
 
@@ -130,10 +131,10 @@ def rnds_played_func(no_of_players):
 		rnds_played_list.append(len(df_lead_list))
 		player_no = player_no + 1
 	return rnds_played_list
-rnds_played_list = rnds_played_func(14)
+rnds_played_list = rnds_played_func(13)
 
 
-df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,18,19,20], sheet_name='THURSDAY SINGLES', usecols=[0,1,26])
+df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,17,18,19], sheet_name='THURSDAY SINGLES', usecols=[0,1,26])
 # NEEDED AFTER WEEK 8
 df_indv_tab["BEST 8 TOTAL"] = best_8_list
 # df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
@@ -150,7 +151,7 @@ df_indv_tab = df_indv_tab.style.format({"AVG": "{:.2f}", "BEST 8 TOTAL": "{:.0f}
 
 
 if menu_selection == "Leaderboard":
-	st.dataframe(df_indv_tab, width=None, height=550, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","RNDS PLAYED","AVG","BEST 8 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
+	st.dataframe(df_indv_tab, width=None, height=528, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","RNDS PLAYED","AVG","BEST 8 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
 
 if menu_selection == "Weekly Winners":
 	st.dataframe(df_weekly_tab, width=None, height=912, use_container_width=True, hide_index=True, column_config={"THURSDAY": "WINNER", "THURS SCORE": "SCORE"})
