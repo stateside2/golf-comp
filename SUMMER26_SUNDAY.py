@@ -3,10 +3,9 @@ import pandas as pd
 import streamlit as st
 import streamlit_antd_components as sac
 # import time  # --- USED FOR TOAST NOTIFICATIONS
-# from variables import *
+from variables import *
 
-excel_file: str = "data/WINTER_GOLF_2526.xlsx"
-week = 24
+
 
 # st.set_page_config(page_title="Winter Best Pairs", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
@@ -22,7 +21,8 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
 # --- BANNER IMAGE
-st.image("images/golf_banner_thurs.png", use_container_width="auto")
+# st.image("images/golf_banner.png", use_container_width="auto")
+st.image("images/gpt_sunday_golf2.png", use_container_width="auto")
 st.divider()
 
 
@@ -33,20 +33,21 @@ menu_selection = sac.buttons(
     	sac.ButtonsItem(label="Nearest Pin", icon="pin-map"),
     	sac.ButtonsItem(label="Handicaps", icon="activity"),
     	sac.ButtonsItem(label="Full Table", icon="table"),
-], label="FINAL - WINTER 25/26 THURSDAY SINGLES", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
+], label="Week " + str(week) + " of 24 - Sunday Singles", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
 # ---
 
 
 
 # --- PANDAS DATA FRAME CREATION ---
-df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,17,18,19], sheet_name='THURSDAY SINGLES', usecols=range(1,27))
+df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,26,27,28], sheet_name='SUNDAY SINGLES', usecols=range(1,27))
 df_golf_tab = df_golf_tab.fillna(0)
 
 df_golf_tab_num_cols = df_golf_tab.columns[df_golf_tab.columns != "NAME"]
 df_golf_tab[df_golf_tab_num_cols] = df_golf_tab[df_golf_tab_num_cols].apply(pd.to_numeric, errors='coerce')  # -- FIXES THE DATATYPE ISSUE WHEN A PLAYERS ROW DOESN'T HAVE A SCORE. ISSUE FOUND HERE ... best_8 = pd.Series(df_lead_list).nlargest(8).sum()
 
 
-df_near_pin = pd.read_excel(excel_file, sheet_name='NEAREST PIN', usecols=[0,2])
+
+df_near_pin = pd.read_excel(excel_file, sheet_name='NEAREST PIN', usecols=[0,1])
 
 
 df_handi_tab = pd.read_excel(excel_file, sheet_name="HANDICAPS", usecols=[0,2])
@@ -102,24 +103,23 @@ week_list = week_list_func(24)
 # df_weekly_tab["WINNER"] = week_win_list
 
 
-df_weekly_tab = pd.read_excel(excel_file, sheet_name='xxxDO NOT EDITxxx', usecols=[0,3,4])
+df_weekly_tab = pd.read_excel(excel_file, sheet_name='xxxDO NOT EDITxxx', usecols=[0,1,2])
 
 
 # ----------------
 
-# --- NEEDED AFTER WEEK 8 --- ADJUST THE NUMBER OF PLAYERS IF NEEDED
-def best_8_func(no_of_players):
-	best_8_list = []
-	player_no = 1
-	while player_no <= no_of_players:
-		df_lead_list = df_golf_tab.loc[(player_no - 1), week_list].values.tolist()
-		df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
-		best_8 = pd.Series(df_lead_list).nlargest(8).sum()
-		best_8_list.append(best_8)
-		player_no = player_no + 1
-	return best_8_list
-best_8_list = best_8_func(13)
-
+# --- NEEDED AFTER WEEK 8 ------ ADJUST THE NUMBER OF PLAYERS IF NEEDED
+# def best_8_func(no_of_players):
+# 	best_8_list = []
+# 	player_no = 1
+# 	while player_no <= no_of_players:
+# 		df_lead_list = df_golf_tab.loc[(player_no - 1), week_list].values.tolist()
+# 		df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
+# 		best_8 = pd.Series(df_lead_list).nlargest(8).sum()
+# 		best_8_list.append(best_8)
+# 		player_no = player_no + 1
+# 	return best_8_list
+# best_8_list = best_8_func(22)
 
 
 # --- NEEDED AFTER WEEK 2 ---
@@ -132,15 +132,17 @@ def rnds_played_func(no_of_players):
 		rnds_played_list.append(len(df_lead_list))
 		player_no = player_no + 1
 	return rnds_played_list
-rnds_played_list = rnds_played_func(13)
+rnds_played_list = rnds_played_func(22)
 
 
-df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,17,18,19], sheet_name='THURSDAY SINGLES', usecols=[0,1,26])
+
+df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,26,27,28], sheet_name='SUNDAY SINGLES', usecols=[0,1,26])
 # NEEDED AFTER WEEK 8
-df_indv_tab["BEST 8 TOTAL"] = best_8_list
-# df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
+# df_indv_tab["BEST 8 TOTAL"] = best_8_list
+df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
 df_indv_tab["RNDS PLAYED"] = rnds_played_list
-df_indv_tab["AVG"] = df_indv_tab["TOTAL"]/df_indv_tab["RNDS PLAYED"]
+df_indv_tab["AVG"] = df_indv_tab["BEST 8 TOTAL"]/df_indv_tab["RNDS PLAYED"]
+# df_indv_tab["AVG"] = df_indv_tab["TOTAL"]/df_indv_tab["RNDS PLAYED"]
 df_indv_tab = df_indv_tab.sort_values(by=["BEST 8 TOTAL", "NAME"], ascending=[False, True])
 df_indv_tab.insert(0, "POSITION", range(1, 1 + len(df_indv_tab)))
 df_indv_tab["DELTA"] = df_indv_tab["BEST 8 TOTAL"] - max(df_indv_tab["BEST 8 TOTAL"])
@@ -152,10 +154,10 @@ df_indv_tab = df_indv_tab.style.format({"AVG": "{:.2f}", "BEST 8 TOTAL": "{:.0f}
 
 
 if menu_selection == "Leaderboard":
-	st.dataframe(df_indv_tab, width=None, height=528, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","RNDS PLAYED","AVG","BEST 8 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
+	st.dataframe(df_indv_tab, width=None, height=838, use_container_width=True, hide_index=True, column_order=("POSITION","NAME","RNDS PLAYED","AVG","BEST 8 TOTAL","DELTA"), column_config={"POSITION": " ", "DELTA": " "})
 
 if menu_selection == "Weekly Winners":
-	st.dataframe(df_weekly_tab, width=None, height=912, use_container_width=True, hide_index=True, column_config={"THURSDAY": "WINNER", "THURS SCORE": "SCORE"})
+	st.dataframe(df_weekly_tab, width=None, height=912, use_container_width=True, hide_index=True, column_config={"SUNDAY": "WINNER", "SUN SCORE": "SCORE"})
 
 if menu_selection == "Nearest Pin":
 	st.dataframe(df_near_pin, width=None,height=912, use_container_width=True, hide_index=True, column_config={"SUNDAY NEAREST PIN": "NEAREST PIN"})
@@ -164,8 +166,7 @@ if menu_selection == "Handicaps":
 	st.dataframe(df_handi_tab, width=None, height=912, use_container_width=True, hide_index=True, column_config={"POSITION": " "})
 
 if menu_selection == "Full Table":
-	df_golf_tab = df_golf_tab.fillna(0)
-	st.dataframe(df_golf_tab, width=None, height=550, use_container_width=True, hide_index=True, column_config={"NAME": st.column_config.Column(pinned=True)})
+	st.dataframe(df_golf_tab, width=None, height=838, use_container_width=True, hide_index=True, column_config={"NAME": st.column_config.Column(pinned=True)})
 
 st.divider()
 
@@ -179,14 +180,15 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.2</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.3</a></small>
 	</div>
 		"""
 	)
 
 st.echo(call_sign)
 
-
+# st.toast("🏅 CONGRATS TO ALL THE WINNERS 🏅")
+# st.balloons()
 
 
 # --- FUTURE ADDITIONS

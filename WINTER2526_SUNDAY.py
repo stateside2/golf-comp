@@ -3,8 +3,10 @@ import pandas as pd
 import streamlit as st
 import streamlit_antd_components as sac
 # import time  # --- USED FOR TOAST NOTIFICATIONS
-from variables import *
+# from variables import *
 
+excel_file: str = "data/WINTER_GOLF_2526.xlsx"
+week = 24
 
 
 # st.set_page_config(page_title="Winter Best Pairs", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
@@ -33,7 +35,7 @@ menu_selection = sac.buttons(
     	sac.ButtonsItem(label="Nearest Pin", icon="pin-map"),
     	sac.ButtonsItem(label="Handicaps", icon="activity"),
     	sac.ButtonsItem(label="Full Table", icon="table"),
-], label="Week " + str(week) + " of 24 - Sunday Singles", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
+], label="FINAL - WINTER 25/26 SUNDAY SINGLES", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
 # ---
 
 
@@ -189,8 +191,8 @@ call_sign = st.html(
 
 st.echo(call_sign)
 
-st.toast("🏅 CONGRATS TO ALL THE WINNERS 🏅")
-st.balloons()
+# st.toast("🏅 CONGRATS TO ALL THE WINNERS 🏅")
+# st.balloons()
 
 
 # --- FUTURE ADDITIONS
