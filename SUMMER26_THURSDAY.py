@@ -50,7 +50,7 @@ df_near_pin = pd.read_excel(excel_file, sheet_name='NEAREST PIN', usecols=[0,2])
 
 df_handi_tab = pd.read_excel(excel_file, sheet_name="HANDICAPS", usecols=[0,2])
 df_handi_tab = df_handi_tab.sort_values(by=["YELLOW TEES", "NAME"], ascending=[True, True])
-df_handi_tab = df_handi_tab.head(25)
+df_handi_tab = df_handi_tab.head(33)
 df_handi_tab.insert(0, "POSITION", range(1, 1 + len(df_handi_tab)))
 
 
@@ -160,7 +160,7 @@ if menu_selection == "Nearest Pin":
 	st.dataframe(df_near_pin, width=None,height=912, use_container_width=True, hide_index=True, column_config={"SUNDAY NEAREST PIN": "NEAREST PIN"})
 
 if menu_selection == "Handicaps":
-	st.dataframe(df_handi_tab, width=None, height=912, use_container_width=True, hide_index=True, column_config={"POSITION": " "})
+	st.dataframe(df_handi_tab, width=None, height=1123, use_container_width=True, hide_index=True, column_config={"POSITION": " "})
 
 if menu_selection == "Full Table":
 	df_golf_tab = df_golf_tab.fillna(0)
