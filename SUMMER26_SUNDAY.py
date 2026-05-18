@@ -39,7 +39,7 @@ menu_selection = sac.buttons(
 
 
 # --- PANDAS DATA FRAME CREATION ---
-df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,26,27,28], sheet_name='SUNDAY SINGLES', usecols=range(1,27))
+df_golf_tab = pd.read_excel(excel_file, skiprows=[0,1,2,25,26,27], sheet_name='SUNDAY SINGLES', usecols=range(1,27))
 df_golf_tab = df_golf_tab.fillna(0)
 
 df_golf_tab_num_cols = df_golf_tab.columns[df_golf_tab.columns != "NAME"]
@@ -132,11 +132,11 @@ def rnds_played_func(no_of_players):
 		rnds_played_list.append(len(df_lead_list))
 		player_no = player_no + 1
 	return rnds_played_list
-rnds_played_list = rnds_played_func(22)
+rnds_played_list = rnds_played_func(21)
 
 
 
-df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,26,27,28], sheet_name='SUNDAY SINGLES', usecols=[0,1,26])
+df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,25,26,27], sheet_name='SUNDAY SINGLES', usecols=[0,1,26])
 # NEEDED AFTER WEEK 8
 # df_indv_tab["BEST 8 TOTAL"] = best_8_list
 df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
