@@ -109,17 +109,17 @@ df_weekly_tab = pd.read_excel(excel_file, sheet_name='xxxDO NOT EDITxxx', usecol
 # ----------------
 
 # --- NEEDED AFTER WEEK 8 ------ ADJUST THE NUMBER OF PLAYERS IF NEEDED
-# def best_8_func(no_of_players):
-# 	best_8_list = []
-# 	player_no = 1
-# 	while player_no <= no_of_players:
-# 		df_lead_list = df_golf_tab.loc[(player_no - 1), week_list].values.tolist()
-# 		df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
-# 		best_8 = pd.Series(df_lead_list).nlargest(8).sum()
-# 		best_8_list.append(best_8)
-# 		player_no = player_no + 1
-# 	return best_8_list
-# best_8_list = best_8_func(22)
+def best_8_func(no_of_players):
+	best_8_list = []
+	player_no = 1
+	while player_no <= no_of_players:
+		df_lead_list = df_golf_tab.loc[(player_no - 1), week_list].values.tolist()
+		df_lead_list = list(filter(None,df_lead_list))  #--- REMOVES THE NULL VALUES IN THE LIST (SO ONLY INTEGERS ARE REMAIN)
+		best_8 = pd.Series(df_lead_list).nlargest(8).sum()
+		best_8_list.append(best_8)
+		player_no = player_no + 1
+	return best_8_list
+best_8_list = best_8_func(21)
 
 
 # --- NEEDED AFTER WEEK 2 ---
@@ -138,11 +138,12 @@ rnds_played_list = rnds_played_func(21)
 
 df_indv_tab = pd.read_excel(excel_file, skiprows=[0,1,2,25,26,27], sheet_name='SUNDAY SINGLES', usecols=[0,1,26])
 # NEEDED AFTER WEEK 8
-# df_indv_tab["BEST 8 TOTAL"] = best_8_list
-df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
+df_indv_tab["BEST 8 TOTAL"] = best_8_list
+# df_indv_tab["BEST 8 TOTAL"] = df_indv_tab["TOTAL"]
 df_indv_tab["RNDS PLAYED"] = rnds_played_list
-df_indv_tab["AVG"] = df_indv_tab["BEST 8 TOTAL"]/df_indv_tab["RNDS PLAYED"]
-# df_indv_tab["AVG"] = df_indv_tab["TOTAL"]/df_indv_tab["RNDS PLAYED"]
+# NEEDED AFTER WEEK 8
+df_indv_tab["AVG"] = df_indv_tab["TOTAL"]/df_indv_tab["RNDS PLAYED"]
+# df_indv_tab["AVG"] = df_indv_tab["BEST 8 TOTAL"]/df_indv_tab["RNDS PLAYED"]
 df_indv_tab = df_indv_tab.sort_values(by=["BEST 8 TOTAL", "NAME"], ascending=[False, True])
 df_indv_tab.insert(0, "POSITION", range(1, 1 + len(df_indv_tab)))
 df_indv_tab["DELTA"] = df_indv_tab["BEST 8 TOTAL"] - max(df_indv_tab["BEST 8 TOTAL"])
