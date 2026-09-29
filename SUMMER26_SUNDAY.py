@@ -33,8 +33,8 @@ menu_selection = sac.buttons(
     	sac.ButtonsItem(label="Nearest Pin", icon="pin-map"),
     	sac.ButtonsItem(label="Handicaps", icon="activity"),
     	sac.ButtonsItem(label="Full Table", icon="table"),
-], label="Week " + str(week) + " of 24 - Sunday Singles", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
-# ---
+], label="FINAL - SUMMER 26 SUNDAY SINGLES", format_func=None, align="center", size="md", radius="md", color="#598506", use_container_width=True)
+# --- 
 
 
 
