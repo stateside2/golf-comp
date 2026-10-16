@@ -4,9 +4,11 @@ import streamlit as st
 st.set_page_config(page_title="Stoneleigh Golf Tournaments", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 
-sunday_singles = st.Page("SUMMER26_SUNDAY.py", title="SUNDAY SINGLES", icon=":material/sports_golf:")
-thursday_singles = st.Page("SUMMER26_THURSDAY.py", title="THURSDAY SINGLES", icon=":material/sports_golf:")
+sunday_singles = st.Page("WINTER2627_SUNDAY.py", title="SUNDAY SINGLES", icon=":material/sports_golf:")
+thursday_singles = st.Page("WINTER2627_THURSDAY.py", title="THURSDAY SINGLES", icon=":material/sports_golf:")
 
+summer26_sunday = st.Page("SUMMER26_SUNDAY.py", title="SUMMER 26 - SUNDAY", icon=":material/trophy:")
+summer26_thursday = st.Page("SUMMER26_THURSDAY.py", title="SUMMER 26 - THURSDAY", icon=":material/trophy:")
 winter2526_sunday = st.Page("WINTER2526_SUNDAY.py", title="WINTER 25/26 - SUNDAY", icon=":material/trophy:")
 winter2526_thursday = st.Page("WINTER2526_THURSDAY.py", title="WINTER 25/26 - THURSDAY", icon=":material/trophy:")
 summer25_sunday = st.Page("SUMMER25_SUNDAY.py", title="SUMMER 25 - SUNDAY", icon=":material/trophy:")
@@ -27,6 +29,8 @@ with st.sidebar:
 	st.write("---")
 
 	st.subheader("Past Tournaments")
+	st.page_link(summer26_sunday, label=summer26_sunday.title, icon=summer26_sunday.icon)
+	st.page_link(summer26_thursday, label=summer26_thursday.title, icon=summer26_thursday.icon)
 	st.page_link(winter2526_sunday, label=winter2526_sunday.title, icon=winter2526_sunday.icon)
 	st.page_link(winter2526_thursday, label=winter2526_thursday.title, icon=winter2526_thursday.icon)
 	st.page_link(summer25_sunday, label=summer25_sunday.title, icon=summer25_sunday.icon)
@@ -40,7 +44,7 @@ with st.sidebar:
 
 	st.write("---")
 
-pg = st.navigation([sunday_singles, thursday_singles, all_time_stats, winter2526_sunday, winter2526_thursday, summer25_sunday, summer25_thursday, winter2425_pairs, winter2425_singles], position="hidden")
+pg = st.navigation([sunday_singles, thursday_singles, all_time_stats, summer26_sunday, summer26_thursday, winter2526_sunday, winter2526_thursday, summer25_sunday, summer25_thursday, winter2425_pairs, winter2425_singles], position="hidden")
 pg.run()
 
 

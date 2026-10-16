@@ -3,9 +3,10 @@ import pandas as pd
 import streamlit as st
 import streamlit_antd_components as sac
 # import time  # --- USED FOR TOAST NOTIFICATIONS
-from variables import *
+# from variables import *
 
-
+excel_file: str = "data/SUMMER_GOLF_2026.xlsx"
+week = 24
 
 # st.set_page_config(page_title="Winter Best Pairs", page_icon="images/golf.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
