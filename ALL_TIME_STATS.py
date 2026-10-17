@@ -4,6 +4,7 @@ import streamlit as st
 import streamlit_antd_components as sac
 
 
+win2627_file: str = "data/WINTER_GOLF_2627.xlsx"
 sum26_file: str = "data/SUMMER_GOLF_2026.xlsx"
 win2526_file: str = "data/WINTER_GOLF_2526.xlsx"
 sum25_file: str = "data/SUMMER GOLF 2025.xlsx"
@@ -40,16 +41,19 @@ menu_selection = sac.buttons(
 
 
 df_w2425_sun = pd.read_excel(win2425_file, skiprows=[0,1,2,3,4,5,6,7,8,9,31,32,33,34,35,36,37,38], sheet_name='Sheet1', usecols=[0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26])
-df_w2425_thurs = pd.read_excel(win2425_file, skiprows=[0,1,2,19,20,21,22,23,24,25,26,27], sheet_name="THURSDAY SINGLES", usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24])
+df_w2425_thurs = pd.read_excel(win2425_file, skiprows=[0,1,2,19,20,21,22,23,24,25,26,27], sheet_name="THURSDAY SINGLES", usecols=range(0,25))
 
-df_sum25_sun = pd.read_excel(sum25_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25])
-df_sum25_thurs = pd.read_excel(sum25_file, skiprows=[0,1,2,18,19,20], sheet_name='THURSDAY SINGLES', usecols=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25])
+df_sum25_sun = pd.read_excel(sum25_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=range(1,26))
+df_sum25_thurs = pd.read_excel(sum25_file, skiprows=[0,1,2,18,19,20], sheet_name='THURSDAY SINGLES', usecols=range(1,26))
 
-df_w2526_sun = pd.read_excel(win2526_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25])
-df_w2526_thurs = pd.read_excel(win2526_file, skiprows=[0,1,2,18,19,20], sheet_name='THURSDAY SINGLES', usecols=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25])
+df_w2526_sun = pd.read_excel(win2526_file, skiprows=[0,1,2,22,23,24], sheet_name='SUNDAY SINGLES', usecols=range(1,26))
+df_w2526_thurs = pd.read_excel(win2526_file, skiprows=[0,1,2,18,19,20], sheet_name='THURSDAY SINGLES', usecols=range(1,26))
 
-df_sum26_sun = pd.read_excel(sum26_file, skiprows=[0,1,2,26,27,28], sheet_name='SUNDAY SINGLES', usecols=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25])
-df_sum26_thurs = pd.read_excel(sum26_file, skiprows=[0,1,2,19,20,21], sheet_name='THURSDAY SINGLES', usecols=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25])
+df_sum26_sun = pd.read_excel(sum26_file, skiprows=[0,1,2,26,27,28], sheet_name='SUNDAY SINGLES', usecols=range(1,26))
+df_sum26_thurs = pd.read_excel(sum26_file, skiprows=[0,1,2,19,20,21], sheet_name='THURSDAY SINGLES', usecols=range(1,26))
+
+df_w2627_sun = pd.read_excel(win2627_file, skiprows=[0,1,2,26,27,28], sheet_name='SUNDAY SINGLES', usecols=range(1,27))
+df_w2627_thurs = pd.read_excel(win2627_file, skiprows=[0,1,2,14,15,16], sheet_name='THURSDAY SINGLES', usecols=range(1,27))
 
 
 # df_alltime = df_w2425_sun.merge(df_w2425_thurs,on='NAME',how='outer').merge(df_sum25_sun,on='NAME',how='outer').merge(df_sum25_thurs,on='NAME',how='outer')
@@ -59,9 +63,12 @@ df_join_1 = df_w2425_sun.join(df_w2425_thurs.set_index("NAME"), on="NAME", how="
 df_join_2 = df_join_1.join(df_sum25_sun.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn1", rsuffix="_25sun")
 df_join_3 = df_join_2.join(df_sum25_thurs.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn2", rsuffix="_25thr")
 df_join_4 = df_join_3.join(df_w2526_sun.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn3", rsuffix="_2526sun")
-df_join_5 = df_join_4.join(df_w2425_thurs.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn4", rsuffix="_2526thr")
+df_join_5 = df_join_4.join(df_w2526_thurs.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn4", rsuffix="_2526thr")
 df_join_6 = df_join_5.join(df_sum26_sun.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn5", rsuffix="_26sun")
-df_alltime = df_join_6.join(df_sum26_thurs.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn6", rsuffix="_26thurs")
+df_join_7 = df_join_6.join(df_sum26_thurs.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn6", rsuffix="_26thurs")
+df_join_8 = df_join_7.join(df_w2627_sun.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn7", rsuffix="_2627sun")
+df_alltime = df_join_8.join(df_w2627_thurs.set_index("NAME"), on="NAME", how="outer", lsuffix="_jn8", rsuffix="_2627thr")
+
 
 # HIGHEST AND LOWEST SCORE CALCULATION
 df_highlow = df_alltime
@@ -84,7 +91,7 @@ df_alltime['LOW_SCORE'] = df_at_low
 
 
 
-table_height = 1228
+table_height = 1365
 
 if menu_selection == "Best Average Score":
 	df_alltime = df_alltime.sort_values(by=["AVERAGE", "NAME"], ascending=[False, True])
@@ -131,7 +138,7 @@ call_sign = st.html(
 	</style>
 
 	<div style="text-align:right">
-		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.1</a></small>
+		<a href="https://www.initrode.uk" target="_blank"><small>initrode - 3.4</a></small>
 	</div>
 		"""
 	)
